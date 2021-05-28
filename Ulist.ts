@@ -3,9 +3,11 @@ import generateRPN from "./RPN/generateRPN";
 import calculateRPN from "./RPN/calculateRPN";
 
 export class Ulist {
-    private _formula;
-    private _rawFormula;
+    private _formula: Array<string>;
+    private _rawFormula: string;
     private _limit = 1000;
+
+    [index: string]: any;
 
     constructor(formula: string) {
         this._rawFormula = formula;
@@ -18,11 +20,14 @@ export class Ulist {
                         const index = parseInt(element);
 
                         if (Number.isNaN(index)) {
+                            // ts doesn't like symbols as object keys
+                            // @ts-ignore
                             return target[element];
                         }
 
                         return calculateRPN(this._formula, index);
                     }
+                    // @ts-ignore
                     return target[element];
                 }),
                 has: ((target, property) => {

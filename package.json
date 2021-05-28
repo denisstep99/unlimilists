@@ -1,0 +1,26 @@
+{
+  "name": "unlimilists",
+  "version": "0.0.1",
+  "description": "Unlimited lists in javascript",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denisstep99/unlimilists.git"
+  },
+  "keywords": [
+    "list",
+    "lists",
+    "proxy",
+    "rpn"
+  ],
+  "author": "stepdenchik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denisstep99/unlimilists/issues"
+  },
+  "homepage": "https://github.com/denisstep99/unlimilists#readme"
+}

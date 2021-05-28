@@ -1,70 +1,62 @@
-import {OPERATION_REGEXP, OPERATIONS, PATTERN} from "../constants";
-
-function calculate(firstOperand: number | string, secondOperand: number | string, operation: string, patternFill: number) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const constants_1 = require("../constants");
+function calculate(firstOperand, secondOperand, operation, patternFill) {
     if (typeof firstOperand === "string") {
-        if (firstOperand === PATTERN) {
+        if (firstOperand === constants_1.PATTERN) {
             firstOperand = patternFill;
-        } else {
+        }
+        else {
             firstOperand = parseFloat(firstOperand);
         }
     }
     if (typeof secondOperand === "string") {
-        if (secondOperand === PATTERN) {
+        if (secondOperand === constants_1.PATTERN) {
             secondOperand = patternFill;
-        } else {
+        }
+        else {
             secondOperand = parseFloat(secondOperand);
         }
     }
-
     switch (operation) {
-        case OPERATIONS.ADD:
+        case constants_1.OPERATIONS.ADD:
             return firstOperand + secondOperand;
-        case OPERATIONS.SUBTRACT:
+        case constants_1.OPERATIONS.SUBTRACT:
             return firstOperand - secondOperand;
-        case OPERATIONS.DIVIDE:
+        case constants_1.OPERATIONS.DIVIDE:
             return firstOperand / secondOperand;
-        case OPERATIONS.MULTIPLY:
+        case constants_1.OPERATIONS.MULTIPLY:
             return firstOperand * secondOperand;
-        case OPERATIONS.POWER:
+        case constants_1.OPERATIONS.POWER:
             return firstOperand ** secondOperand;
         default:
             throw new Error('Incorrect operand');
     }
 }
-
-function calculateRPN(rpn: Array<string>, patternFill: number = 1): number {
-    const helpingStack: Array<string> = [];
-
+function calculateRPN(rpn, patternFill = 1) {
+    const helpingStack = [];
     rpn = [...rpn].reverse();
-
     while (rpn.length) {
         const lastSymbol = rpn.pop() || "";
-
-        if (OPERATION_REGEXP.test(lastSymbol)) {
+        if (constants_1.OPERATION_REGEXP.test(lastSymbol)) {
             const secondOperand = helpingStack.pop();
             const firstOperand = helpingStack.pop();
-
             if (firstOperand === undefined || secondOperand === undefined) {
                 throw new Error("Incorrect RPN!");
             }
-
             helpingStack.push(calculate(firstOperand, secondOperand, lastSymbol, patternFill).toString());
-        } else {
+        }
+        else {
             helpingStack.push(lastSymbol);
         }
     }
-
     if (helpingStack.length > 1) {
         throw new Error('Execution problems!');
     }
-
     const result = helpingStack.pop();
-
     if (result) {
         return parseFloat(result);
     }
-
     return NaN;
 }
-
-export default calculateRPN;
+exports.default = calculateRPN;

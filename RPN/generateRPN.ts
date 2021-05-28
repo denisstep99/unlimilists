@@ -2,12 +2,13 @@ import {OPERATIONS, OPERATION_REGEXP, OPERATIONS_PRIORITY} from "../constants";
 
 function generateRPN(notation: string): Array<string> {
     const result: Array<string> = [];
-    const helpingStack: Array<string> = [];
+    const helpingStack: Array<OPERATIONS> = [];
 
     let isNumber = false;
 
     for (const currentSymbol of notation) {
         if (OPERATION_REGEXP.test(currentSymbol)) {
+
             if (isNumber) {
                 isNumber = false;
             }
@@ -44,17 +45,17 @@ function generateRPN(notation: string): Array<string> {
 
             if (
                 !lastHelperStackElement ||
-                OPERATIONS_PRIORITY[lastHelperStackElement] < OPERATIONS_PRIORITY[currentSymbol]
+                OPERATIONS_PRIORITY[lastHelperStackElement] < OPERATIONS_PRIORITY[currentSymbol as OPERATIONS]
             ) {
                 if (lastHelperStackElement){
                     helpingStack.push(lastHelperStackElement);
                 }
 
-                helpingStack.push(currentSymbol);
+                helpingStack.push(currentSymbol as OPERATIONS);
             } else {
                 while (
                     lastHelperStackElement &&
-                    OPERATIONS_PRIORITY[lastHelperStackElement] >= OPERATIONS_PRIORITY[currentSymbol]
+                    OPERATIONS_PRIORITY[lastHelperStackElement] >= OPERATIONS_PRIORITY[currentSymbol as OPERATIONS]
                     ) {
                     result.push(lastHelperStackElement);
                     lastHelperStackElement = helpingStack.pop();
@@ -62,7 +63,7 @@ function generateRPN(notation: string): Array<string> {
                 if (lastHelperStackElement) {
                     helpingStack.push(lastHelperStackElement);
                 }
-                helpingStack.push(currentSymbol);
+                helpingStack.push(currentSymbol as OPERATIONS);
             }
 
         } else {
