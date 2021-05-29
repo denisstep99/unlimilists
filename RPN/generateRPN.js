@@ -1,23 +1,21 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const constants_1 = require("../constants");
+import { OPERATIONS, OPERATION_REGEXP, OPERATIONS_PRIORITY } from "../constants.js";
 function generateRPN(notation) {
     const result = [];
     const helpingStack = [];
     let isNumber = false;
     for (const currentSymbol of notation) {
-        if (constants_1.OPERATION_REGEXP.test(currentSymbol)) {
+        if (OPERATION_REGEXP.test(currentSymbol)) {
             if (isNumber) {
                 isNumber = false;
             }
-            if (currentSymbol === constants_1.OPERATIONS.OPEN_BRACKET) {
+            if (currentSymbol === OPERATIONS.OPEN_BRACKET) {
                 helpingStack.push(currentSymbol);
                 continue;
             }
             let lastHelperStackElement = helpingStack.pop();
-            if (currentSymbol === constants_1.OPERATIONS.CLOSE_BRACKET) {
+            if (currentSymbol === OPERATIONS.CLOSE_BRACKET) {
                 while (lastHelperStackElement &&
-                    constants_1.OPERATIONS_PRIORITY[lastHelperStackElement] > constants_1.OPERATIONS_PRIORITY[currentSymbol]) {
+                    OPERATIONS_PRIORITY[lastHelperStackElement] > OPERATIONS_PRIORITY[currentSymbol]) {
                     result.push(lastHelperStackElement);
                     lastHelperStackElement = helpingStack.pop();
                 }
@@ -27,7 +25,7 @@ function generateRPN(notation) {
                 continue;
             }
             if (!lastHelperStackElement ||
-                constants_1.OPERATIONS_PRIORITY[lastHelperStackElement] < constants_1.OPERATIONS_PRIORITY[currentSymbol]) {
+                OPERATIONS_PRIORITY[lastHelperStackElement] < OPERATIONS_PRIORITY[currentSymbol]) {
                 if (lastHelperStackElement) {
                     helpingStack.push(lastHelperStackElement);
                 }
@@ -35,7 +33,7 @@ function generateRPN(notation) {
             }
             else {
                 while (lastHelperStackElement &&
-                    constants_1.OPERATIONS_PRIORITY[lastHelperStackElement] >= constants_1.OPERATIONS_PRIORITY[currentSymbol]) {
+                    OPERATIONS_PRIORITY[lastHelperStackElement] >= OPERATIONS_PRIORITY[currentSymbol]) {
                     result.push(lastHelperStackElement);
                     lastHelperStackElement = helpingStack.pop();
                 }
@@ -59,4 +57,4 @@ function generateRPN(notation) {
     result.push(...helpingStack.reverse());
     return result;
 }
-exports.default = generateRPN;
+export default generateRPN;

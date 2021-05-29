@@ -1,4 +1,4 @@
-import {OPERATIONS, OPERATION_REGEXP, OPERATIONS_PRIORITY} from "../constants";
+import {OPERATIONS, OPERATION_REGEXP, OPERATIONS_PRIORITY} from "../constants.js";
 
 function generateRPN(notation: string): Array<string> {
     const result: Array<string> = [];

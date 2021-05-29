@@ -1,9 +1,7 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const constants_1 = require("../constants");
+import { OPERATION_REGEXP, OPERATIONS, PATTERN } from "../constants.js";
 function calculate(firstOperand, secondOperand, operation, patternFill) {
     if (typeof firstOperand === "string") {
-        if (firstOperand === constants_1.PATTERN) {
+        if (firstOperand === PATTERN) {
             firstOperand = patternFill;
         }
         else {
@@ -11,7 +9,7 @@ function calculate(firstOperand, secondOperand, operation, patternFill) {
         }
     }
     if (typeof secondOperand === "string") {
-        if (secondOperand === constants_1.PATTERN) {
+        if (secondOperand === PATTERN) {
             secondOperand = patternFill;
         }
         else {
@@ -19,15 +17,15 @@ function calculate(firstOperand, secondOperand, operation, patternFill) {
         }
     }
     switch (operation) {
-        case constants_1.OPERATIONS.ADD:
+        case OPERATIONS.ADD:
             return firstOperand + secondOperand;
-        case constants_1.OPERATIONS.SUBTRACT:
+        case OPERATIONS.SUBTRACT:
             return firstOperand - secondOperand;
-        case constants_1.OPERATIONS.DIVIDE:
+        case OPERATIONS.DIVIDE:
             return firstOperand / secondOperand;
-        case constants_1.OPERATIONS.MULTIPLY:
+        case OPERATIONS.MULTIPLY:
             return firstOperand * secondOperand;
-        case constants_1.OPERATIONS.POWER:
+        case OPERATIONS.POWER:
             return firstOperand ** secondOperand;
         default:
             throw new Error('Incorrect operand');
@@ -38,7 +36,7 @@ function calculateRPN(rpn, patternFill = 1) {
     rpn = [...rpn].reverse();
     while (rpn.length) {
         const lastSymbol = rpn.pop() || "";
-        if (constants_1.OPERATION_REGEXP.test(lastSymbol)) {
+        if (OPERATION_REGEXP.test(lastSymbol)) {
             const secondOperand = helpingStack.pop();
             const firstOperand = helpingStack.pop();
             if (firstOperand === undefined || secondOperand === undefined) {
@@ -59,4 +57,4 @@ function calculateRPN(rpn, patternFill = 1) {
     }
     return NaN;
 }
-exports.default = calculateRPN;
+export default calculateRPN;

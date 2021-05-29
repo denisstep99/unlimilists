@@ -1,6 +1,6 @@
-import {OPERATIONS} from "./constants";
-import generateRPN from "./RPN/generateRPN";
-import calculateRPN from "./RPN/calculateRPN";
+import {OPERATIONS} from "./constants.js";
+import generateRPN from "./RPN/generateRPN.js";
+import calculateRPN from "./RPN/calculateRPN.js";
 
 export class Ulist {
     private _formula: Array<string>;

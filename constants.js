@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.OPERATION_REGEXP = exports.OPERATIONS_PRIORITY = exports.PATTERN = exports.OPERATIONS = void 0;
-var OPERATIONS;
+export var OPERATIONS;
 (function (OPERATIONS) {
     OPERATIONS["OPEN_BRACKET"] = "(";
     OPERATIONS["CLOSE_BRACKET"] = ")";
@@ -10,9 +7,9 @@ var OPERATIONS;
     OPERATIONS["SUBTRACT"] = "-";
     OPERATIONS["POWER"] = "^";
     OPERATIONS["DIVIDE"] = "/";
-})(OPERATIONS = exports.OPERATIONS || (exports.OPERATIONS = {}));
-exports.PATTERN = 'n';
-exports.OPERATIONS_PRIORITY = {
+})(OPERATIONS || (OPERATIONS = {}));
+export const PATTERN = 'n';
+export const OPERATIONS_PRIORITY = {
     [OPERATIONS.OPEN_BRACKET]: 1,
     [OPERATIONS.CLOSE_BRACKET]: 1,
     [OPERATIONS.ADD]: 2,
@@ -21,5 +18,5 @@ exports.OPERATIONS_PRIORITY = {
     [OPERATIONS.DIVIDE]: 3,
     [OPERATIONS.POWER]: 4,
 };
-const operationsString = Object.keys(exports.OPERATIONS_PRIORITY).join('\\');
-exports.OPERATION_REGEXP = new RegExp(`[\\${operationsString}]`);
+const operationsString = Object.keys(OPERATIONS_PRIORITY).join('\\');
+export const OPERATION_REGEXP = new RegExp(`[\\${operationsString}]`);

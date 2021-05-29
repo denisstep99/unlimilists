@@ -1,4 +1,4 @@
-import {OPERATION_REGEXP, OPERATIONS, PATTERN} from "../constants";
+import {OPERATION_REGEXP, OPERATIONS, PATTERN} from "../constants.js";
 
 function calculate(firstOperand: number | string, secondOperand: number | string, operation: string, patternFill: number) {
     if (typeof firstOperand === "string") {

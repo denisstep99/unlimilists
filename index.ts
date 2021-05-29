@@ -1,3 +1,1 @@
-import {Ulist} from "./Ulist";
-
-export default Ulist;
+export {Ulist} from "./Ulist.js";
