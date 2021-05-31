@@ -1,9 +1,9 @@
-#Unlimilists
+# Unlimilists
 <hr>
 Unlimilists is a way to create unlimited array-like objects. 
 All objects created using Unlimilsts constructor don't store their values but calculate at the moment of accessing the array field. 
 
-##Getting started
+## Getting started
 <hr>
 This section explains how to get started with Unlimilists. First of all install it.
 
@@ -14,7 +14,7 @@ npm i unlimilists
 Then you can import it.
 
 ```javascript
-import {Ulist} from "./index.js";
+import {Ulist} from 'unlimilists';
 ```
 
 Create a new Ulist by passing a formula to the constructor. You can use `n` variable in your 
@@ -29,7 +29,7 @@ const ulist = new Ulist('2*n + 1*n^3 - 0.2*n^4');
 const tenthElement = ulist[10]; // 2*10 + 10**3 - 0.2*10**4 = -980
 ```
 
-##API Ulist
+## API Ulist
 <hr>
 
 #### constructor
@@ -42,7 +42,7 @@ Available operations:
 - `/` - divide
 - `^` - power
 
-Examples
+**Examples**
 ```javascript
 const ulist_1 = new Ulist('2 * (2 - 4)'); // [-4, -4, -4, ....]
 const ulist_2 = new Ulist('2*n + 1*n^3 - 0.2*n^4'); // [0, 2.8, 8.8, 16.8, ....]
@@ -51,7 +51,7 @@ const ulist_2 = new Ulist('2*n + 1*n^3 - 0.2*n^4'); // [0, 2.8, 8.8, 16.8, ....]
 #### getFormula
 Returns an initial formula.
 
-Example
+**Example**
 ```javascript
 const ulist_1 = new Ulist('2 * (2 - 4)'); // [-4, -4, -4, ....]
 const formula = ulist_1.getFormula(); // 2 * (2 - 4)
@@ -65,7 +65,7 @@ step?: number (default = 1)
 
 Returns an array with elements from firstIndex to lastIndex (lastIndex is not included).
 
-Example
+**Example**
 ```javascript
 const ulist_1 = new Ulist('2 * (2 - 4*n)'); 
 
