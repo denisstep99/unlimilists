@@ -5,13 +5,17 @@ import calculateRPN from "./RPN/calculateRPN.js";
 export class Ulist {
     private _formula: Array<string>;
     private _rawFormula: string;
+    private _memoization: boolean;
     private _limit = 1000;
 
     [index: string]: any;
 
-    constructor(formula: string) {
+    constructor(formula: string, memoization = false) {
+        const __cacheArray: Array<number> = [];
+        
         this._rawFormula = formula;
         this._formula = generateRPN(formula.replace(/\s/g, ''));
+        this._memoization = memoization;
 
         return new Proxy(this,
             {
@@ -23,6 +27,13 @@ export class Ulist {
                             // ts doesn't like symbols as object keys
                             // @ts-ignore
                             return target[element];
+                        }
+                        
+                        if (this._memoization) {
+                            if (!__cacheArray[index]) {
+                                __cacheArray[index] = calculateRPN(this._formula, index);
+                            }
+                            return __cacheArray[index];
                         }
 
                         return calculateRPN(this._formula, index);

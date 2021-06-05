@@ -1,10 +1,8 @@
 # Unlimilists
-<hr>
 Unlimilists is a way to create unlimited array-like objects. 
 All objects created using Unlimilsts constructor don't store their values but calculate at the moment of accessing the array field. 
 
 ## Getting started
-<hr>
 This section explains how to get started with Unlimilists. First of all install it.
 
 ```
@@ -30,10 +28,10 @@ const tenthElement = ulist[10]; // 2*10 + 10**3 - 0.2*10**4 = -980
 ```
 
 ## API Ulist
-<hr>
 
 #### constructor
 Gets an initial formula which is calculated every time the user tries to get an element by index. 
+The second parameter turns on memoization.
 
 Available operations:
 - `*` - multiply
@@ -46,6 +44,8 @@ Available operations:
 ```javascript
 const ulist_1 = new Ulist('2 * (2 - 4)'); // [-4, -4, -4, ....]
 const ulist_2 = new Ulist('2*n + 1*n^3 - 0.2*n^4'); // [0, 2.8, 8.8, 16.8, ....]
+
+const ulist_3 = new Ulist('2*n', true); // [0, 2, 4, 6, ...] memoization is turned on
 ```
 
 #### getFormula
